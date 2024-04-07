@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1712275595 source:d:\ds\rr_scheduling\helpers.c
+	"Helpers.h"
+
+1712278580 d:\ds\rr_scheduling\helpers.h
+	"Global.h"
+
+1712394951 source:d:\ds\rr_scheduling\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"Global.h"
+	"LinkedList.h"
+	"Helpers.h"
+
+1712393636 d:\ds\rr_scheduling\linkedlist.h
+	"stdlib.h"
+	"Global.h"
+
+1712394536 source:d:\ds\rr_scheduling\linkedlist.c
+	<stdio.h>
+	"LinkedList.h"
+
+1712278569 d:\ds\rr_scheduling\global.h
+
+1712276259 source:d:\ds\rr_scheduling\global.c
+
