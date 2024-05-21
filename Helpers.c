@@ -1,60 +1,13 @@
 #include "Helpers.h"
 
-int MenuOperation(){
-    int z;
-    //Checking that input is an integer number to avoid bugs
-    if (scanf("%d", &z) != 1) {
-        printf("\nInvalid input enter a number from the menu (1 ~6) :");
-
-        while (getchar() != '\n');
-
-
-        while (scanf("%d", &z) != 1) {
-            printf("\nInvalid input enter a number from the menu (1 ~6) : ");
-            // Clear input buffer
-            while (getchar() != '\n');
-        }
+// Menu Display Function.
+void MenuDisplay(){
+        printf("Round Robin Scheduling Program :\n");
+        printf("a. Add a process\n");
+        printf("b. Serve a process\n");
+        printf("c. How many waiting processes?\n");
+        printf("d. Display information of waiting processes\n");
+        printf("e. Display total CPU burst time\n");
+        printf("f. Exit\n");
+        printf("Enter your choice: ");
     }
-    return z;
-}
-
-//============================================================
-int ReadPositive() {
-    int y = 1, x;
-    int numScanned;
-
-    while (y == 1) {
-
-        numScanned = scanf("%d", &x);
-
-        if (numScanned != 1 || x <= 0) {
-
-            while (getchar() != '\n');
-
-            printf("\nEnter a positive integer please: ");
-        } else {
-            break; // Exit the loop
-        }
-    }
-    return x;
-}
-//===================================================
-int ReadPositiveandZero(){
-
-    int y = 1 , x;
-
-    while (y == 1) {
-        if (scanf("%d", &x) != 1){
-            printf("Invalid input (You must enter an integer value)!");
-            return 1 ;
-            break ;
-        }
-
-        if (x < 0 ) {
-            printf("\nEnter a positive number please : ");
-        }else{
-            y = 0;
-        }
-    }
-    return x;
-}

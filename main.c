@@ -1,73 +1,110 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "Global.h"
+#include "Process.h"
 #include "LinkedList.h"
 #include "Helpers.h"
+#include "FileHandler.h"
 
-void Display(Process e){
-    printf("\nprocess ID : %d  Remaining Time : %d second \n",e.processID,e.burstTime);
-}
+// Prototype Of Functions
+void DisplayProcessInfo(Process e);
 
 int main()
 {
     List l;
     Process e;
     CreateList(&l);
-    int choice, burstTime;
+    char choice;
+    int pos = 0, burstTime;
 
-    int loopcounter;
-    int y,x=1,position=0,key,additioncase;
+    // Reads Data From Files.
+    if (ReadFromFile(&l) == 0)
+        printf("Error can't read from the file !\n");
+
+    if (ReadPosFromFile(&pos) == 0){
+        printf("Error loading Possession from file!\n");
+        pos = ReadPosFromFile(&l);
+    }
 
      do {
-        printf("\nMenu:\n");
-        printf("1. Add a process\n");
-        printf("2. Serve a process\n");
-        printf("3. How many waiting processes?\n");
-        printf("4. Display information of waiting processes\n");
-        printf("5. Display total CPU burst time\n");
-        printf("6. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        MenuDisplay();
+        scanf(" %c", &choice);
+        while (getchar() != '\n');
 
         switch (choice) {
-            case 1:
+            // Add Processes.
+            case 'a':
                 while (true){
                     printf("\nEnter Process Time : ");
                     if (scanf("%d", &burstTime) == 1 && burstTime > 0){
-                        addProcess(&e,burstTime);
+                        addProcess(&e,burstTime,&l);
                         InsertList(ListSize(&l),e,&l);
-                        int a = saveToFile(&l);
-                        printf("Process with Id Number : %d and time %d added Successfully !\n",e.processID,e.burstTime);
+                        printf("\n--------------- Process with Id : %d and BurstTime %d added Successfully ! -------------------\n\n",e.processID,e.burstTime);
                         break;
                     } else {
                         while (getchar() != '\n');
-                        printf("Invalid input. Please enter a positive integer.\n");
+                        printf("\n------------------- Invalid input. Please enter a positive integer. -----------------------\n");
                     }
                 }
                 break;
-            case 2:
-                break;
-            case 3:
-                printf("\nThere are %d waiting process\n" , NumberOfWatingProcess(&l));
-                break;
-            case 4:
-                 TraverseList(&l,&Display);
-                break;
-            case 5:
-                 printf("\nTotal Burst Time : %d\n", displayTotalBurstTime());
-                break;
-            case 6:
-                if(saveToFile(&l)){
-                    printf("\nExiting And Saved Successfully.\n");
-                }else{
-                    printf("\nError Opening File Not Saved.\n");
+            // Reserve Processes.
+            case 'b':
+                if (ListEmpty(&l)){
+                    printf("\n---------------------------- There is No Process To Serve ------------------------------\n\n");
+                } else {
+                    ServeProcess(pos ,&l ,&e);
+                    if (e.burstTime <= 0) {
+                        printf("\n------------------- Process with ID: %d is already completed. ----------------------\n\n", e.processID);
+                        DeleteItem(pos, &e, &l);
+                        if (pos == 0){
+                            continue;
+                        } else {
+                            pos = pos % (ListSize(&l));
+                        }
+                    } else {
+                        printf("\n--------------------------- Process with ID: %d served ---------------------------- \n", e.processID);
+                        printf("-------------------------------- Time left: %d -------------------------------------\n\n", e.burstTime);
+                        pos = (pos + 1) % (ListSize(&l));
+                    }
                 }
                 break;
+            // How Many Waiting Processes.
+            case 'c':
+                printf("\n------------------------------ There are %d waiting process ----------------------------\n\n" , NumberOfWatingProcess(&l));
+                break;
+            // Display Processes Informations.
+            case 'd':
+                if (ListEmpty(&l)) {
+                    printf("\n---------------------------- No Process Waiting yet ! ------------------------------\n\n");
+                    break;
+                } else {
+                    printf("\n --------------------- Displaying waiting processes information: ----------------------\n\n");
+                    TraverseList(&l, &DisplayProcessInfo);
+                }
+                printf("\n-----------------------------------------------------------------------------------------\n\n");
+                break;
+            // Display Total BurstTime.
+            case 'e':
+                printf("\n--------------------------- Total Burst Time : %d -----------------------------------\n\n", displayTotalBurstTime(&l));
+                break;
+
+            case 'f':
+                if(saveToFile(&l) && SavePosToFile(pos)){
+                    printf("\n-------------------------- Exiting And Saved Successfully. ---------------------------\n");
+                } else {
+                    printf("\n-------------------------- Error Opening File Not Saved. -----------------------------\n");
+                }
+                break;
+
             default:
-                printf("Invalid choice! Please enter a valid option.\n");
+                printf("\n------------------------ Invalid choice! Please enter a valid option. --------------------\n\n");
         }
-    } while (choice != 6);
+    } while (choice != 'f');
 
     return 0;
+}
+
+// To Display The Informations.
+void DisplayProcessInfo(Process e){
+    printf("\nProcessID : [%d] , Time Left : [%d]", e.processID, e.burstTime);
 }

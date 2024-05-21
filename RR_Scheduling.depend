@@ -25,3 +25,81 @@
 
 1712276259 source:d:\ds\rr_scheduling\global.c
 
+1715214701 source:d:\round_robin\helpers.c
+	"Helpers.h"
+
+1715212501 d:\round_robin\helpers.h
+
+1715149201 d:\round_robin\global.h
+
+1715226061 source:d:\round_robin\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"Process.h"
+	"LinkedList.h"
+	"Helpers.h"
+	"FileHandler.h"
+
+1713866963 d:\round_robin\linkedlist.h
+	"Global.h"
+
+1713867065 source:d:\round_robin\linkedlist.c
+	<stdio.h>
+	"LinkedList.h"
+
+1715236204 source:d:\round_robin\filehandler.c
+	<stdio.h>
+	"FileHandler.h"
+
+1715182678 d:\round_robin\filehandler.h
+	"LinkedList.h"
+
+1715182523 d:\round_robin\process.h
+	"Global.h"
+	"LinkedList.h"
+
+1715227037 source:d:\round_robin\process.c
+	<stdio.h>
+	<stdlib.h>
+	"Process.h"
+
+1715236204 source:d:\swe\round_robin\filehandler.c
+	<stdio.h>
+	"FileHandler.h"
+
+1715182678 d:\swe\round_robin\filehandler.h
+	"LinkedList.h"
+
+1713866963 d:\swe\round_robin\linkedlist.h
+	"Global.h"
+
+1715149201 d:\swe\round_robin\global.h
+
+1715214701 source:d:\swe\round_robin\helpers.c
+	"Helpers.h"
+
+1715212501 d:\swe\round_robin\helpers.h
+
+1713867065 source:d:\swe\round_robin\linkedlist.c
+	<stdio.h>
+	"LinkedList.h"
+
+1715226061 source:d:\swe\round_robin\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"Process.h"
+	"LinkedList.h"
+	"Helpers.h"
+	"FileHandler.h"
+
+1715182523 d:\swe\round_robin\process.h
+	"Global.h"
+	"LinkedList.h"
+
+1715227037 source:d:\swe\round_robin\process.c
+	<stdio.h>
+	<stdlib.h>
+	"Process.h"
+

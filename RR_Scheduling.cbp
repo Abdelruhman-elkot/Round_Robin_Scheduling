@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="FileHandler.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FileHandler.h" />
 		<Unit filename="Global.h" />
 		<Unit filename="Helpers.c">
 			<Option compilerVar="CC" />
@@ -40,6 +44,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LinkedList.h" />
+		<Unit filename="Process.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Process.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
